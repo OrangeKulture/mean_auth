@@ -10,7 +10,8 @@ const app = express();
 const port = process.env.port || 8080;
 const users = require('./routes/users');
 
-mongoose.connect(config.database);
+let dbUrl = process.env.MONGOLAB_URI;
+mongoose.connect(dbUrl || port);
 mongoose.connection.on('connected', () => {
     console.log('Connected to database '+config.database);
 })
